@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-T33X8JR');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248742602052101"
+     crossorigin="anonymous"></script>
+
+    <title>Solve Word Search - Online Word Search Solver. Solve Word Searches From Text and Photos</title>
+    <style type='text/css'>
+      body {
+        padding: 10px;
+      }
+      input.number {
+        width: 60px;
+      }
+      .row {
+        margin-top: 10px;
+      }
+      .word-search-grid table tr td {
+        width:20px;
+        height:20px;
+        font-size: 14pt;
+        font-weight: bold;
+        border: 2px solid black;
+      }
+      .word-list-wrapper {
+        background-color: #ffffdc;
+        padding: 5px;
+      }
+      .word-list-grid .row .word-cell {
+        font-size: 14pt;
+        font-weight: bold;
+      }
+      .hidden {
+        display: none;
+      }
+      .photoupload-progress-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .photoupload-progress {
+        color: black;
+        font-weight: bold;
+        font-size: 14pt;
+      }
+      textarea {
+        border: 3px solid #000000 !important;
+      }
+      .word-list-grid  {
+        padding: 20px;
+      }
+      @media only screen and (max-width: 480px) {
+        .word-list-grid .row {
+          height: 200px;
+          overflow-x: hidden;
+          overflow-y: auto;
+        }
+        .btn-sample {
+          width: 100%;
+        }
+      }
+      footer {
+        color: #dddddd;
+        height: 100px;
+        padding: 20px;
+      }
+      .main {
+        padding-top: 50px;
+      }
+    </style>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.999.0.min.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0NPW01G4YX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-0NPW01G4YX');
+    </script>
+    <script data-ad-client="ca-pub-5248742602052101" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script type='text/javascript' src="word_search_solver.js"></script>
+    <script type="text/javascript">
+        function SolveWordSearch(){
+          var text = $('#row-letters').val().replace(/[^A-Za-z,]/g,'').toUpperCase();
+          var words = $('#word-list').val().replace(/[^A-Za-z,]/g,'').toUpperCase();
+          if(text && text.length && window.localStorage){
+            window.localStorage.setItem('wordsearch_text',text);
+            gtag('event', 'click', {'event_category': 'cta', 'event_label': 'saved_text', 'value': 1});
+          }
+          if(words && words.length && window.localStorage){
+            window.localStorage.setItem('wordsearch_words',words);
+            gtag('event', 'click', {'event_category': 'cta', 'event_label': 'saved_words', 'value': 1});
+          }
+          gtag('event', 'click', {'event_category': 'cta', 'event_label': 'solve', 'value': 1});
+          window.WordSearchSolver.Initialize(text, words);
+          window.WordSearchSolver.Solve();
+        }
+
+        $(document).ready(function(){
+
+        // Initialize the Amazon Cognito credentials provider
+          AWS.config.region = 'us-east-1'; // Region
+          AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+              IdentityPoolId: 'us-east-1:6bf65037-8402-4370-837b-088cce539420',
+          });
+
+          $('button.btn-generate').on('click',SolveWordSearch);
+          $('button.btn-sample').on('click',function(){
+            gtag('event', 'click', {'event_category': 'cta', 'event_label': 'show_sample', 'value': 1});
+            $('#row-letters').val( $('#sample_letters').html() );
+            $('#word-list').val( $('#sample_words').html() );
+            SolveWordSearch();
+          });
+          if(window.localStorage && window.localStorage.getItem('wordsearch_text'))
+          {
+            $('#row-letters').val(window.localStorage.getItem('wordsearch_text'));
+          }
+          if(window.localStorage && window.localStorage.getItem('wordsearch_words')){
+            $('#word-list').val(window.localStorage.getItem('wordsearch_words'));
+          }
+      });
+    </script>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T33X8JR"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <nav class="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img width=30 height=30 src="wordsearch.png"/>&nbsp;<b>Solve Word Search</b>&nbsp;</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="how_it_works.html">How It Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <section class="main">
+      <div class="container-fluid">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248742602052101"
+     crossorigin="anonymous"></script>
+<!-- HorizontalAd1 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5248742602052101"
+     data-ad-slot="6144380528"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border:2px solid #aaaaaa">     
+            <h6><b>Why Word Searches Are Great</b></h6>
+            <ul>
+              <li><a href="word-search-makes-you-smarter.html">Word Search Makes You Smarter</a></li>
+              <li><a href="word-search-helps-you-practice.html">Word Search Helps You Practice</a></li>
+              <li><a href="word-search-helps-you-build-focus.html">Word Search Helps You Build Focus</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="border:2px solid #aaaaaa">
+            <h6><b>How to Solve a Word Search Fast</b></h6>
+            <ul>
+              <li><a href="word-search-is-a-bad-search-problem.html">A Word Search is a Bad Search Problem</a></li>
+              <li><a href="word-search-focus-on-unique-letters.html">Focus on Unique Letters First</a></li>
+              <li><a href="word-search-group-by-first-letters.html">Group Words By First Letters</a></li>
+              <li><a href="word-search-scan-in-one-direction.html">Scan your Word Search in One Direction</a></li>
+            </ul>
+          </div>
+        </div>
+        <br><br>
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h4 style="background-color:#dddddd;padding:10px;"><b>Online Word Search Solver.</b></h4>
+            <p>Solve your word search online using your camera, uploaded image or just type in the letters and words. Our algorithm will attempt to solve your word search in seconds.</p>
+            <p><b>Character Recognition</b><br>Our character recognition can read the letters from a picture of your word search taken from your camera. It works better with small word searches, cropped well with good lighting. In some situations it might not work at all. We are working on improving this.</p>
+            <p><b>Type in Letters</b><br>For best results type the letters of each rows to avoid any issues with the character recognition.</b></p>
+            <a data-bs-toggle="collapse" href="#collapseInstructions" role="button" aria-expanded="false" aria-controls="collapseInstructions">
+              <h5><b>Instructions(click):</b></h5>
+            </a>
+            <div class="collapse" id="collapseInstructions">
+              <ol>
+                <li>Enter the word search letters in the Row Letters input separated by commas. Each row should be written as one long word of letters, eg: SPSSRCDLFREHTOM,EETSROANIRDNSUS etc.</li>
+                <li>Type each word in the Word List input separated by commas.</li>
+                <li>Click Generate & Solve. Click on the word below to perform a word search for that word.</li>
+              </ol>
+            </div>
+            <button class='btn btn-primary btn-sample white-text'>See A Sample</button>
+            <div class='row'>
+              <div class='row-inputs form-group col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+                <h4>Row Letters</h4>
+                <p>Type in the letters from each row below separated by commas.</p>
+                <textarea class='form-control' wrap='virtual' name='row-letters' id='row-letters' wrap='virtual' rows='10' cols='40'></textarea>
+                <p>Or use Character Recognition: Take a picture of the text, crop, then upload. Use the flash to eliminate shadows</p>
+                <div class='photoupload-progress-wrapper'>
+                  <input class='photoupload' id='letters-photo' name='letters-photo' type="file" accept="image/*" >
+                  <span class='photoupload-progress' id='letters-photo-progress'></span>
+                </div>
+              </div>
+              <div class='word-list-wrapper form-group col-lg-6 col-md-6 col-sm-6 col-xs-6'>
+                <h4>Word List</h4>
+                <p>Type in the words separated by commas</p>
+                <textarea class='form-control' wrap='virtual' name='word-list' id='word-list' wrap='virtual' rows='10' cols='40'></textarea>
+                <p>Or Use Character Recognition. Take a picture of the text, crop, then upload. Use the flash to eliminate shadows</p>
+                <div class='photoupload-progress-wrapper'>
+                  <input class='photoupload' id='words-photo' name='words-photo' type="file" accept="image/*" >
+                  <span class='photoupload-progress' id='words-photo-progress'></span>
+                </div>
+              </div>
+            </div>
+            <div class='row' style='background-color: #eeeeee;padding:5px;'>
+              <div class='form-group col-lg-2 col-md-2 col-sm-2 col-xs-12'>
+                <button class='form-control btn btn-success btn-generate'>Solve Word Search</button>
+              </div>
+            </div>
+            <hr>
+            <div class='row'>
+              <div class='word-search-grid form-group col-lg-12 col-md-12 col-sm-12 col-xs-12'></div>
+              <div class='word-list-grid form-group col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+                <b>Click on the word below to locate that word in the word search grid. Scroll for more.</b>
+                <div class='row'></div>
+              </div>
+            </div>
+            <div class='hidden' id='sample_letters'>SPSSRCDLFREHTOM, EETSROANIRDNSUS, CDSSLESBIAETAMC, NIIUEAKRBMFNALN, EONTANOOEIEXZEP, RDIAOCIGRTEDWYW, VAHSPRALEBRSIAF, ERCKENSNDSPOICA, SEAEACSRUATTPTS, SDMMRIURPDEISET, FEAROSGEERNDTVR, EVDNHERESSDWORC, NIIIOSPTSREYLFY, DLNNRSESSERTIAW, SGSSSERTCASEPOC</div>
+            <div class='hidden' id='sample_words'>Actress, Brokers, Cabbies, Causes, Cope, Crowds, Cues, Daredevil, Deadlines, Editors, Exams, Fail, Fast, Fear, Fends, Flyers, Frenzy, Goals, Machinists, Management, Medics, Mind, Mother, Nerves, Newspapers, Noise, Panic, Pilots, Plane, Racers, Reporters, Rides, Rifts, Rushing, Speed, Surgeons, Task, Tenders, Tension, Waiter, Waitresses
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5248742602052101"
+     crossorigin="anonymous"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-fb+5w+4e-db+86"
+     data-ad-client="ca-pub-5248742602052101"
+     data-ad-slot="7306253100"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    <footer class="text-center text-lg-start bg-dark text-muted">
+      <p>&copy; 2021 Asset Foundry Inc.</p>
+      <b>Made by Michael</b>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
